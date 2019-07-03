@@ -17,9 +17,10 @@ import java.util.List;
 public class Deck {
 	List<Card> cards;
 	Deque<Card> deck;
-	Deque<Card> playedCards;
+	Deque<Card> playedCards = new ArrayDeque<Card>();
 
 	ArrayList<Color> colors = new ArrayList<Color>(List.of(Color.RED, Color.BLUE, Color.GREEN, Color.YELLOW));
+	
 	ArrayList<String> values = new ArrayList<String>(
 			List.of("0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "+2", "Reverse", "Skip"));
 
@@ -68,6 +69,16 @@ public class Deck {
 		return c;
 	}
 	
+	public Card getFirstCard(){
+		Card c = getCard();
+		playedCards.addFirst(c);
+		return c;
+	}
+	
+	public Card getTopCard() {
+		return playedCards.getFirst();
+	}
+	
 	public ArrayList<Card> getFirstHand(){
 		ArrayList<Card> firstHand = new ArrayList<Card>();
 		for(int i=0;i<7;i++) {
@@ -80,5 +91,9 @@ public class Deck {
 	
 	public void cardPlayed(Card c) {
 		playedCards.add(c);
+	}
+	
+	public int getSize() {
+		return deck.size();
 	}
 }

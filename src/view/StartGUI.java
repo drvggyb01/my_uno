@@ -40,7 +40,6 @@ public class StartGUI extends JFrame{
     public StartGUI(int gamemode){      
     	super("Namen");
     	
-    	getContentPane().setLayout(new BorderLayout(20, 20));
     	players.setLayout(new GridLayout(4, 2));
     	btnP.setLayout(new BoxLayout(btnP, BoxLayout.Y_AXIS));
     	
@@ -91,6 +90,7 @@ public class StartGUI extends JFrame{
     	getContentPane().add(players, BorderLayout.CENTER);
     	getContentPane().add(btnP, BorderLayout.SOUTH);
     	getContentPane().setPreferredSize(new Dimension(400, 200));
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     	pack();
         setResizable(false);
     }

@@ -27,18 +27,20 @@ public class Session extends JFrame{
 		
 		deck = new Deck();
 		
-		p1 = new Player(n1, deck.getFirstHand());
-		p2 = new Player(n2, deck.getFirstHand());
-		p3 = new Player(n3, deck.getFirstHand());
-		p4 = new Player(n4, deck.getFirstHand());
+		p1 = new Player(n1, deck.getFirstHand(), deck);
+		p2 = new Player(n2, deck.getFirstHand(), deck);
+		p3 = new Player(n3, deck.getFirstHand(), deck);
+		p4 = new Player(n4, deck.getFirstHand(), deck);
 		
-		table = new Table(p1, deck);
+		table = new Table(p1, p2, p3, p4, deck);
 		
 		getContentPane().add(table);
-		
-		getContentPane().setPreferredSize(new Dimension(600, 600));
+		table.setLayout(null);
+    	getContentPane().setPreferredSize(new Dimension(800, 300));
+    	
     	pack();
-        setResizable(false);
 		setVisible(true);
+
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 }
