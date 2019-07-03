@@ -9,4 +9,7 @@ package serverController;
  */
 public class Rules {
 
+	public Rules() {
+		
+	}
 }

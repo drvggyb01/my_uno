@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 import model.Player;
 import serverController.MyButtonListener;
 import serverController.MyCardListener;
+import serverController.Rules;
 import model.Card;
 
 /**
@@ -25,6 +26,7 @@ public class PlayerPanel extends JPanel {
 	public Player player;
 	public Table table;
 	public InfoPanel info;
+	private Rules rules;
 	private JPanel pane;
 	private JLabel name;
 	private JLabel points;
@@ -37,7 +39,8 @@ public class PlayerPanel extends JPanel {
 	private ArrayList<Card> myDeck;
 	private ArrayList<CardView> myDeckV = new ArrayList<CardView>();
 	
-	public PlayerPanel(Player p, InfoPanel i, Table t) {
+	public PlayerPanel(Player p, InfoPanel i, Table t, Rules r) {
+		rules = r;
 		info = i;
 		table = t;
 		player = p;
@@ -62,14 +65,14 @@ public class PlayerPanel extends JPanel {
 		cards.setLayout(new FlowLayout());
 		for (Card c : myDeck) {
 			CardView card = new CardView(c);
-			card.addActionListener(new MyCardListener(player, table, this));
+			card.addActionListener(new MyCardListener(player, table, this, rules));
 			cards.add(card);
 			myDeckV.add(card);
 		}
 		setLayout(null);
 		
-		unoListener = new MyButtonListener(player, table, this);		
-		drawListener = new MyButtonListener(player, table, this);
+		unoListener = new MyButtonListener(player, table, this, rules);		
+		drawListener = new MyButtonListener(player, table, this, rules);
 		
 		sayUNO.addActionListener(unoListener);
 		draw.addActionListener(drawListener);

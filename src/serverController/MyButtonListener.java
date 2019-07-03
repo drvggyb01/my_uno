@@ -22,11 +22,13 @@ public class MyButtonListener implements ActionListener {
 	Player player;
 	Table table;
 	PlayerPanel playerP;
+	Rules rules;
 
-	public MyButtonListener(Player p, Table t, PlayerPanel pp) {
+	public MyButtonListener(Player p, Table t, PlayerPanel pp, Rules r) {
 		player = p;
 		table = t;
 		playerP = pp;
+		rules = r;
 	}
 
 	@Override
@@ -34,7 +36,7 @@ public class MyButtonListener implements ActionListener {
 		Card card = table.getTopCard();
 		if (player.getTurn()) {
 			if (e.getActionCommand() == "Say UNO") {
-				if (player.canSayUNO()) {
+				if (rules.canSayUNO(player)) {
 					table.setError("");
 					player.sayUNO();
 					table.setSaidUNO(player);
@@ -45,15 +47,11 @@ public class MyButtonListener implements ActionListener {
 					table.nextPlayer();
 				}
 			} else if (e.getActionCommand() == "Draw") {
-				if (player.cantPlay() && !player.hasDrawn()) {
+				if (rules.cantPlay()) {
 					table.setError("");
 					player.drawCard();
 					player.setHasDrawn(true);
 					playerP.rePaintCards(player.getCards());
-					if (player.cantPlay()) {
-						table.nextPlayer();
-					}
-
 				} else if (!player.cantPlay()) {
 					table.setError("You can play a card");
 					player.drawCard();
