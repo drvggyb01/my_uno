@@ -55,6 +55,4 @@ public class Rules {
 			return false;
 		}
 	}
-
-	
 }

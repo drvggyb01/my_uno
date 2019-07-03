@@ -21,18 +21,20 @@ public class MyCardListener implements ActionListener {
 	Player player;
 	Table table;
 	PlayerPanel playerP;
+	Rules rules;
 
-	public MyCardListener(Player p, Table t, PlayerPanel pp) {
+	public MyCardListener(Player p, Table t, PlayerPanel pp, Rules r) {
 		player = p;
 		table = t;
 		playerP = pp;
+		rules = r;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		CardView card = (CardView) e.getSource();
 		if (player.getTurn()) {
-			if (player.canPlay(card)) {
+			if (rules.canPlay(player, card, table.getTopCard())) {
 				table.setError("");
 				table.setMessage(card.colorToString(), card.getValue(), player);
 				player.playCard(card);

@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 import model.Card;
 import model.Deck;
 import model.Player;
+import serverController.Rules;
 
 /**
  * @author Georgiy
@@ -32,20 +33,22 @@ public class Table extends JPanel {
 	public JPanel decks = new JPanel();
 
 	private InfoPanel info;
+	private Rules rules;
 
 	public Table(Player p1, Player p2, Player p3, Player p4, Deck d) {
 		player1 = p1;
 		player2 = p2;
 		player3 = p3;
 		player4 = p4;
-
+		
 		info = new InfoPanel(player1.getName());
 		info.setBounds(10, 11, 320, 100);
 
-		playerV = new PlayerPanel(player1, info, this);
+		playerV = new PlayerPanel(player1, info, this, rules);
 		playerV.setBounds(10, 122, 780, 160);
 
 		deck = d;
+		rules = new Rules();
 		player1.setTurn(true);
 
 		topCard = deck.getFirstCard();
