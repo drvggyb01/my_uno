@@ -23,12 +23,12 @@ public class Rules {
 	 * @param player, topCard, playedCard
 	 * @return if the player can play
 	 */
-	public boolean canPlay(Player player, CardView playedCard, CardView topCard) {
+	public boolean canPlay(Player player, CardView playedCard, Card topCard) {
 		
-		if(topCard.toCard().getColor()==playedCard.toCard().getColor()) {
+		if(topCard.getColor()==playedCard.toCard().getColor()) {
 			return true;
 		}
-		else if(topCard.toCard().getValue()==playedCard.toCard().getValue()) {
+		else if(topCard.getValue()==playedCard.toCard().getValue()) {
 			return true;
 		}
 		else if(playedCard.toCard().getType()=="Wild") {
@@ -39,12 +39,33 @@ public class Rules {
 		}		
 	}
 	
-	public boolean canDraw(Player player, CardView playedCard, CardView topCard) {
-		if(!canPlay(player,playedCard, topCard)&&player.hasDrawn()==false) {
+	public boolean canPlay(Player player, Card playedCard, Card topCard) {
+		
+		if(topCard.getColor()==playedCard.getColor()) {
 			return true;
-		}else {
-			return false;
 		}
+		else if(topCard.getValue()==playedCard.getValue()) {
+			return true;
+		}
+		else if(playedCard.getType()=="Wild") {
+			return true;
+		}
+		else {
+			return false;
+		}		
+	}
+	
+	public boolean canDraw(Player player, Card topCard) {
+		boolean abelToPlay=false;
+		for(Card card : player.getCards()) {
+			if(canPlay(player, card, topCard)) {
+				abelToPlay=true;
+			}
+		}
+		if(player.hasDrawn()==true) {
+			abelToPlay=false;
+		}
+		return abelToPlay;
 	}
 	
 	public boolean canSayUno(Player player) {
