@@ -47,7 +47,7 @@ public class MyButtonListener implements ActionListener {
 					table.nextPlayer();
 				}
 			} else if (e.getActionCommand() == "Draw") {
-				if (rules.cantPlay()) {
+				if (rules.canDraw()) {
 					table.setError("");
 					player.drawCard();
 					player.setHasDrawn(true);
